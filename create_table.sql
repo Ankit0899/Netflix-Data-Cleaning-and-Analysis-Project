@@ -1,10 +1,10 @@
-CREATE TABLE netflix (
+create TABLE netflix_raw (
     show_id VARCHAR(10) PRIMARY KEY,
     type VARCHAR(10),              -- Movie or TV Show
-    title VARCHAR(255),
+    title NVARCHAR(255),
     director VARCHAR(255),
     cast TEXT,
-    country VARCHAR(100),
+    country VARCHAR(500),
     date_added DATE,
     release_year INT,
     rating VARCHAR(10),           -- e.g., PG-13, TV-MA, etc.
