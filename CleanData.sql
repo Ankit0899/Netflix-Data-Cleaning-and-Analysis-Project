@@ -68,3 +68,19 @@ Select director, country
 from netflix_Country nc
 inner join netflix_directors nd on nc.show_id = nd.show_id
 group by director, country
+------------------------------------------------
+
+Select * from netflix_raw where duration is null
+
+with cte as (
+Select *
+,ROW_NUMBER() over(partition by title, type order by show_id) as rn
+from netflix_raw
+)
+Select show_id, type,title,cast(date_added as date) as date_added, release_year
+,rating, case when duration is null then rating else duration end as duration, description
+into netflix
+from cte
+where rn=1 and date_added is null
+
+Select * from netflix
